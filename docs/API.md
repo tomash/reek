@@ -12,9 +12,6 @@ You can use reek inside your Ruby file `check_dirty.rb`
 
 ```ruby
 require 'reek'
-require 'reek/source/source_code'
-require 'reek/cli/report/report'
-require 'reek/core/examiner'
 
 source =<<END
 class Dirty
@@ -28,15 +25,23 @@ class Dirty
 end
 END
 
-source_code = Reek::Source::SourceCode.from(source)
 reporter = Reek::CLI::Report::TextReport.new
-reporter.add_examiner Reek::Core::Examiner.new(source_code)
+reporter.add_examiner Reek::Examiner.new(source)
+
 puts reporter.show
 ```
 
 This will show the list of errors in variable `source`.
 
-`reek` can take `source` as `String`, `File` or `IO`.
+`Reek::Examiner.new` can take `source` as `String`, `File` or `IO`, or an array
+of file names.
+
+```
+# Examine a file object
+reporter.add_examiner Reek::Examiner.new(File.new('dirty.rb'))
+# Examine source from an array of file names
+reporter.add_examiner Reek::Examiner.new(['also_dirty.rb', 'clean.rb')
+```
 
 Also, besides normal text output, `reek` can also generate output in YAML,
 JSON, HTML and XML by using the following Report types:
