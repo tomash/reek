@@ -48,16 +48,16 @@ module Reek
           display_total_smell_count
         end
 
-        def smells
+        private
+
+        def smell_summaries
           @examiners.each_with_object([]) do |examiner, result|
             result << summarize_single_examiner(examiner)
           end
         end
 
-        private
-
         def display_summary
-          smells.reject(&:empty?).each { |smell| puts smell }
+          smell_summaries.reject(&:empty?).each { |smell| puts smell }
         end
 
         def display_total_smell_count

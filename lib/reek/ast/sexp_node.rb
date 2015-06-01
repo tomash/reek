@@ -4,6 +4,7 @@ module Reek
     # Extensions to +Sexp+ to allow +TreeWalker+ to navigate the abstract
     # syntax tree more easily.
     #
+    # @api private
     module SexpNode
       #
       # Carries out a depth-first traversal of this syntax tree, yielding

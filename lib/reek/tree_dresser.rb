@@ -5,6 +5,7 @@ module Reek
   # Adorns an abstract syntax tree with mix-in modules to make accessing
   # the tree more understandable and less implementation-dependent.
   #
+  # @api private
   class TreeDresser
     def initialize(klass_map = AST::ASTNodeClassMap.new)
       @klass_map = klass_map
